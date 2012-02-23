@@ -4,6 +4,14 @@
   <artifactId>global-exception-handler</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <name>Spring 3.1 GlobalExceptionHandler</name>
+  <developers>
+  	<developer>
+  		<name>Darek Zoń</name>
+  		<url>http://darekzon.com</url>
+  	</developer>
+  </developers>
+  
   <dependencies>
   	<dependency>
   		<groupId>org.aspectj</groupId>
@@ -41,9 +49,4 @@
   		<version>2.2.2</version>
   	</dependency>
   </dependencies>
-  <organization>
-  	<name>Darek Zon</name>
-  	<url>http://darekzon.com</url>
-  </organization>
-  <name>Spring 3.1 GlobalExceptionHandler</name>
 </project>
