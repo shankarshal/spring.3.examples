@@ -24,12 +24,12 @@
 	-->
        <aop:aspectj-autoproxy />
        <aop:config>
-       		<aop:aspect id="exceptionHandler" ref="exceptionHandler">
+       		<aop:aspect id="exceptionHandler" ref="globalExceptionHandler">
        			<!-- find all methods that returns ModelAndView objects -->
 	            <aop:pointcut expression="execution(org.springframework.web.servlet.ModelAndView+ *(..))" id="returningMav" />
 	            <!-- and execute them inside exceptionHandler -->
 	            <aop:around method="exceptionHandler" pointcut-ref="returningMav" />
             </aop:aspect>
        </aop:config>
-       <bean id="exceptionHandler" class="com.darekzon.spring.exhandler.aop.ExceptionHandler" />
+       <bean id="globalExceptionHandler" class="com.darekzon.spring.exhandler.aop.ExceptionHandler" />
 </beans>
