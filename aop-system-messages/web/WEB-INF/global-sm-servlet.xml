@@ -12,7 +12,8 @@
                            http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
 	<mvc:annotation-driven/>
-	<context:component-scan base-package="com.darekzon.spring.exhandler.web" />
+	<context:component-scan base-package="com.darekzon.spring.aopmessages.web" />
+	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
@@ -24,12 +25,15 @@
 	-->
        <aop:aspectj-autoproxy />
        <aop:config>
-       		<aop:aspect id="exceptionHandler" ref="globalExceptionHandler">
-       			<!-- find all methods that returns ModelAndView objects -->
-	            <aop:pointcut expression="execution(org.springframework.web.servlet.ModelAndView+ *(..))" id="returningMav" />
-	            <!-- and execute them inside exceptionHandler -->
-	            <aop:around method="exceptionHandler" pointcut-ref="returningMav" />
-            </aop:aspect>
+       		<aop:aspect id="sysMessages" ref="systemMessages">
+                     <!-- This tells AspectsJ that they should run method messageHandler from class MessageHandler, 
+                     	everytime when Spring runs method returning ModelAndView. System should catch return value and pass it to messageHandler method
+                     	as a parameter 'mav' -->
+                     <aop:pointcut expression="execution(org.springframework.web.servlet.ModelAndView+ *(..))" id="returningMav" />
+                     <aop:after-returning method="messageHandler" returning="mav" pointcut-ref="returningMav" />
+              </aop:aspect>
+
        </aop:config>
-       <bean id="globalExceptionHandler" class="com.darekzon.spring.exhandler.aop.ExceptionHandler" />
+       <bean id="systemMessages" class="com.darekzon.spring.aopmessages.aop.MessagesHandler" />
+
 </beans>
